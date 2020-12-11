@@ -1,0 +1,212 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<div class="row space-rows">
+    <div class="col">
+        <div class="card cards-shadown cards-hover" data-aos="flip-left" data-aos-duration="950" data-toggle="modal" data-target="#mymodal">
+            <div class="card-header" style="background-color: rgb(217,208,190);height: 244px;"><span class="space"><a href="#"></a></span>
+                <div class="cardheader-text">
+                    <h4 id="heading-card"></h4>
+                    <p id="cardheader-subtext" style="color: rgb(150,128,128);font-size: 35px;">Nuevo Evento</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--eventitos-->
+    {% for row in evs %}
+    <div class="col">
+        <div class="card cards-shadown cards-hover" data-aos="slide-right" data-aos-duration="950" data-toggle="modal" data-target="#modalito{{loop.index}}">
+            <div class="card-header" style="background-color: #444444;height: 244px;"><span class="space"><a></a></span>
+                <div class="cardheader-text"></div>
+                <p style="color: rgb(255,255,255);">{{row.nombre}}</p>
+                <div class="row">
+                    <div class="col"><a href="/actividad/{{row.id_evento}}"><button class="btn btn-primary btn-block" type="button" style="background-color: rgb(252,134,68);">Actividades</button></a></div>
+                </div>
+                <div class="row">
+                    <div class="col"><a href="/ambiente/{{row.id_evento}}"><button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal1" type="button" style="background-color: rgb(252,134,68);">Ambientes</button></a></div>
+                </div>
+                <div class="row">
+                    <div class="col"><a href="/material/{{row.id_evento}}"><button class="btn btn-primary btn-block text-center" data-toggle="modal" data-target="#modal1" type="button" style="background-color: rgb(252,134,68);">Materiales</button></a>a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% for row in evs %}
+    <div id="modalito{{loop.index}}" class="modal fade">
+        <div class="modal-dialog">
+           <div class="modal-content">
+              <div class="modal-header">
+      
+                 <h4 class="modal-title"></h4>
+              </div>
+              <div class="modal-body">
+      
+                 <form action="" method="POST">
+                    <div class="form-group" hidden>
+      
+                        <label>ID:</label>
+                        {{up_e.id_e(class_='form-control'
+                    ,value=row.id_evento, autocomplete='off',autofocus=true)}}
+       
+       
+                     </div>
+      
+                    <div class="form-group">
+      
+                       <label>Nombre:</label>
+                       {{up_e.nombre(class_='form-control'
+                   ,value=row.nombre, autocomplete='off',autofocus=true)}}
+      
+      
+                    </div>
+                    <div class="form-group">
+      
+                        <label>Fecha incial:</label>
+                        {{up_e.fecha_inicial(class_='form-control'
+                   ,value=row.fecha_inicial, autocomplete='off',autofocus=true)}}
+       
+       
+                     </div>
+                     <div class="form-group">
+
+                        <label>Fecha final:</label>
+                        {{up_e.fecha_final(class_='form-control'
+                    ,value=row.fecha_final, autocomplete='off',autofocus=true)}}
+       
+       
+                     </div>
+                     <div class="form-group">
+      
+                        <label>Ubicacion:</label>
+                        {{up_e.ubicacion(class_='form-control'
+                    ,value=row.ubicacion, autocomplete='off',autofocus=true)}}
+       
+       
+                     </div>
+                     <div class="form-group">
+      
+                        <label>Descripcion:</label>
+                        {{up_e.descripcion(class_='form-control'
+                    ,value=row.descripcion, autocomplete='off',autofocus=true)}}
+       
+       
+                     </div>
+      
+      
+      
+                    <div class="form-group">
+      
+      
+                        {{ up_e.submit_button}}
+                        {{ up_e.delete}}
+                        {{ up_e.csrf_token}}
+
+                        
+      
+      
+                    </div>
+      
+      
+                 </form>
+                </div>
+            </div>
+            </div>
+        </div>
+
+                </div>
+              {% endfor %}
+
+<div id="mymodal" class="modal" >
+    <div class="modal-dialog">
+       <div class="modal-content">
+          <div class="modal-header">
+  
+             <h4 class="modal-title">Nuevo Evento</h4>
+          </div>
+          <div class="modal-body">
+  
+             <form action="" method="POST">
+  
+  
+                <div class="form-group">
+  
+                   <label>Evento:</label>
+                   {{ev_form.nombre(class_='form-control'
+                   ,placeholder='', autocomplete='off',autofocus=true)}}
+
+                   <ul>
+                    {% for error in ev_form.nombre.errors %}
+                    <li>{{error}}</li>
+                    {% endfor %}
+                </ul>
+  
+  
+                </div>
+                <div class="form-group">
+  
+                    <label>Fecha inicial:</label>
+                    {{ev_form.fecha_inicial(class_='form-control',type="date"
+                    ,placeholder='', autocomplete='off',autofocus=true)}}
+                    
+                    <ul>
+                        {% for error in ev_form.fecha_inicial.errors %}
+                        <li>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                 </div>
+                 <div class="form-group">
+  
+                    <label>Fecha final:</label>
+                    {{ev_form.fecha_final(class_='form-control',type="date"
+                    ,placeholder='', autocomplete='off',autofocus=true)}}
+
+                    <ul>
+                        {% for error in ev_form.fecha_final.errors %}
+                        <li>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+   
+                 </div>
+                 <div class="form-group">
+  
+                    <label>Ubicacion:</label>
+                    {{ev_form.ubicacion(class_='form-control'
+                    ,placeholder='', autocomplete='off',autofocus=true)}}
+                    
+                    <ul>
+                        {% for error in ev_form.ubicacion.errors %}
+                        <li>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                 </div>
+                 <div class="form-group">
+  
+                    <label>Descripcion:</label>
+                    {{ev_form.descripcion(class_='form-control'
+                    ,placeholder='', autocomplete='off',autofocus=true)}}
+                    <ul>
+                        {% for error in ev_form.descripcion.errors %}
+                        <li>{{error}}</li>
+                        {% endfor %}
+                    </ul>
+                 </div>
+                <div class="form-group">
+  
+  
+                    {{ ev_form.submit_button}}
+                    {{ ev_form.csrf_token}}
+  
+  
+                </div>
+  
+  
+             </form>
+  
+  
+          </div>
+
+        </div>
+        </div>
+</div>
+
+{%endblock%}

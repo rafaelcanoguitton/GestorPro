@@ -1,0 +1,377 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+body{
+    background-color: black;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.Container{
+    width: 100%;
+    height: 100%;
+}
+
+
+.top_navbar{                   /*MODIFICAR*/
+    background: black ;
+    height: 80px;    
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.top_navbar .hamburguesa{
+    width: 60px;
+    background: black;
+    position: relative;
+    font-size: 28px;
+}
+
+/* BOTON CON RAYITAS DEL SITE BAR*/
+.top_navbar .hamburguesa .hamburguesa__interior{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+    width: 40px;
+    height: 20px;
+}
+
+.top_navbar .hamburguesa .hamburguesa__interior > div{
+    width: 40px;
+    height: 4px;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.fa-user
+{
+    color: #fff;
+}
+
+.top_navbar .hamburguesa .hamburguesa__interior > div.two{
+    top: 10px;
+    width: 40px;
+}
+
+.top_navbar .hamburguesa .hamburguesa__interior > div.three{
+    top: 20px;
+   /* width: 40px;*/
+}
+
+.top_navbar .menu{
+    width: calc(100% - 80px);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.top_navbar .menu .logo{          /*ACA IRA LA IMAGEN*/
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #FF842C;
+    font-size: 25px;
+    font-family: "Anton";
+}
+
+.top_navbar .menu .right_menu ul li{
+    position: relative;
+}
+
+.top_navbar .menu .right_menu ul li .fas{
+    font-size: 22px;
+    cursor: pointer;
+    cursor: #f59958;
+}
+
+.top_navbar .menu .right_menu ul li .profile_dd{
+    position: absolute;
+    top: 35px;
+    right: -10px;
+    background: #fff;
+    width: 180px;
+    padding: 10px 0;
+    box-shadow: 0 0 2px rgb(0,0,0,0.5);
+    border-radius: 3px;
+    user-select: none;
+    display: none;
+
+}
+
+.top_navbar .menu .right_menu ul li .profile_dd .dd_item{
+    padding: 10px;
+    cursor: pointer;
+    cursor: #f59958;
+}
+
+.top_navbar .menu .right_menu ul li .profile_dd .dd_item:hover{
+    background: #f59958;
+}
+
+
+.top_navbar .menu .right_menu ul li .profile_dd:before{
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: 10px;
+    border: 10px solid;
+    border-color: transparent transparent  #fff transparent;
+}
+
+.top_navbar .menu .right_menu ul li .profile_dd.active{
+    display: block;
+}
+
+/************BARRA BUSQUEDA**********/
+.boxContainer{
+    margin: auto;
+    margin-top:1.3%;
+    position: relative;
+    width: 550px;
+    height: 45px;
+    border: 3px solid #FF842C;
+    padding: 0px 10px;
+    border-radius: 30px;
+    background: #fff;
+    margin-left: 48px;
+}
+
+.elementsContainer{
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+
+}
+.search{
+    border: none;
+    height: 100%;
+    width: 100%;
+    padding: 0px 10px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-family: "Nunito";
+    color: #424242;
+    font-weight: 500;
+}
+.search:focus{
+    outline: none;
+}
+.fa-search{
+    color: #FF842C;
+}
+
+
+
+/**************TOP BAR OFICIAL***********/
+header{
+    width: 66%;
+    height: 70px;
+    background-color: #444444;
+    margin-top: 5.2%;
+    position: relative;
+    margin-left: 300px;
+    
+}
+
+header nav ul{
+    width: auto;
+    float: left;
+    margin-top: 8px;
+}
+
+header nav li
+{
+    display: inline-block;
+    padding: 15px 30px;
+}
+
+header nav a{
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  
+}
+
+header nav li:hover{
+    background: #FF842C;
+}
+
+
+/************** TERMINA TOP BAR OFICIAL***********/
+
+
+/**************ACCESOS*******************/
+.general{
+    margin: auto;
+    margin-top: 5%;
+    position: static;
+    width: 1010px;
+    height: 800px;
+    margin-left: 300px;
+    background-color: #444444;
+    position: fixed;
+}
+
+.general .texto h2{
+    margin-left: 30px;
+    color: white;
+    margin-top: 2%;
+}
+
+.general .texto p{
+    margin-left: 30px;
+    color: white;
+    margin-top: 3%;
+}
+
+.general .button{
+    background: #FF842C ;
+    color: white;
+    display: inline-block;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin: 20px;
+    padding: 10px 0px;
+    text-align: center;
+    width: 200px;
+    text-decoration: none;
+    box-shadow: #a84702;
+    border-radius: 10px;
+    border-radius: 50px;
+}
+
+.general .contenedor .form{
+
+    margin-top: -1%;
+    margin-left: 27px;
+}
+
+.general .contenedor .form .form-input{
+    width: 500px;
+    height: 45px;
+    border-color: #FF842C;
+    border-radius: 50px;
+}
+
+.general .contenedor .form .btn-submit{
+    background: #5ABB5E ;
+    color: white;
+    display: inline-block;
+    font-size: 1.25em;
+    font-weight: bold;
+    margin: 20px;
+    padding: 10px 0px;
+    text-align: center;
+    width: 150px;
+    text-decoration: none;
+    box-shadow: #449947;
+    border-radius: 10px;
+    border-radius: 50px;
+}
+
+
+
+
+
+/************** TERMINA ACCESOS*******************/
+
+
+/**************SIDE BAR*****************/
+
+
+.main_container .sidebar 
+{
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 265px;
+    height: 100%;
+    background: #444444;
+    transition: all 0.3s ease;
+}
+
+
+.main_container .sidebar .sidebar__inner{
+    position: relative;
+
+}
+
+.main_container .sidebar .perfil{
+    display: flex;
+    align-items: center;
+    color: #fff;
+    padding: 25px 0;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+
+}
+
+.main_container .sidebar .perfil .img{
+    padding: 0 18px;
+}
+
+.main_container .sidebar .perfil .img img{
+    width: 45px;
+}
+
+
+.main_container .sidebar .profile p:first-child{
+    font-size: 14px;
+    color: #444444;
+    margin-bottom: 3px;
+}
+
+.main_container .sidebar ul li a{
+    color: #fff;
+    font-size: 18px;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.main_container .sidebar ul li a .icon{
+    margin-right: 15px;
+    font-size: 28px;
+}
+
+.main_container .sidebar ul li a span{
+    display: inline-block;
+}
+
+.main_container .sidebar ul li a:hover{
+    background: #FF842C;
+  
+}
+
+.Container.active .sidebar{
+    width: 90px;
+}
+
+.Container.active .sidebar ul li a span.titulo,
+.Container.active .sidebar .perfil_info{
+    display: none;
+}
+
+
+
+/*https://www.youtube.com/watch?v=F7krXl5pwNA*/
+
+
+

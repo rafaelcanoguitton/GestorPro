@@ -1,0 +1,67 @@
+% extends "prelogin-layout.html" %}
+
+{% block title %}Login y registrarse{%endblock %}
+
+{% block content %}
+    <form action="{{url_for('login')}}", method="POST">
+        <div>
+            {{reg_form.username(class_='form-control'
+            ,placeholder='Usuario', autocomplete='off',autofocus=true)}}
+
+            <ul>
+                {% for error in reg_form.username.errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            {{reg_form.email(class_='form-control',
+            placeholder='Correo')}}
+            <ul>
+                {% for error in reg_form.email.errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            {{reg_form.password(class_='form-control',
+            placeholder='Contraseña')}}
+            <ul>
+                {% for error in reg_form.password.errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            {{ reg_form.submit_button}}
+            
+        </div>
+        {{ reg_form.csrf_token}}
+    </form>
+    <form action="{{url_for('login')}}", method="POST">
+        <div>
+            {{log_form.username(class_='form-control'
+            ,placeholder='Usuario', autocomplete='off',autofocus=true)}}
+
+            <ul>
+                {% for error in log_form.username.errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            {{log_form.password(class_='form-control',
+            placeholder='Contraseña')}}
+            <ul>
+                {% for error in log_form.password.errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            {{ log_form.submit_button}}
+            
+        </div>
+        {{ log_form.csrf_token}}
+    </form>
+{% endblock %}

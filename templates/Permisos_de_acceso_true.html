@@ -1,0 +1,33 @@
+{% extends "Permisos_de_acceso.html" %}
+{% block content %}
+<div class="general">
+        <div class="texto">
+            <h2>Roles del evento</h2>
+            <p>
+                Invita a diferentes personas a colaborar en tu evento de distintas formas,<br>
+                recuerda que todo trabajo es mejor si se realiza en equipo!!
+            </p>
+            <h2>Asignar roles</h2>
+            <div class="contenedor">
+                <form action="/roles" method="POST" class="form">
+                   <label for="correo" class="form-label"></label>
+                   <input type="email" name="email" class="form-input" id="correo" placeholder="   Ingrese un correo">
+                    <select class="form-select" name="select" aria-label="Evento">
+                        {% for row in evs %}
+                        <option value={{row.id_evento}}>{{row.nombre}}</option>
+                        {% endfor %}
+                    </select>
+                   <input type="submit" class="btn-submit" value="Agregar">
+
+                </form>
+            </div>
+            <p>
+                Puede crear, editar y eliminar eventos, actividades, ambientes,  catalogos de materiales, <br>
+                comites organizadores, así como también puede registrar los egresos que se presenten a lo <br>
+                largo del evento, además podrá ver la cantidad de pre inscritos e inscritos en la landing <br>
+                page del evento.
+            </p>
+        </div>
+
+    </div>
+{%endblock%}

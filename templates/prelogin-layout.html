@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js"crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="static/estilos.css">
+        <title>{% block title %}{%endblock %} - GestorPro</title>
+    </head>
+    <body>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {{messages[0][1]}}
+            {% endif %}
+        {% endwith %}
+        {% block content %}
+
+        {% endblock %}
+    </body>
+
+
+
+
+</html>

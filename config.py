@@ -1,0 +1,1 @@
+app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql://rafxar:password@localhost/gestor'
