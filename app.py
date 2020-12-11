@@ -74,7 +74,7 @@ def dashboard():
         current_user.eventos.append(evento)
         db.session.commit()
         return redirect(url_for('dashboard')) 
-    return render_template("/dashboard_true.html",ev_form=evento_form,evs=eventitos,up_e=upe_form)
+    return render_template("/dashboard_true.html",ev_form=evento_form,evs=eventitos,up_e=upe_form,nomb=current_user.usuario)
 #CERRAR SESIÓN
 @app.route('/actividad/<int:id>',methods=['GET','POST'])
 def actividad(id):
@@ -109,7 +109,7 @@ def send_mail():
         link = url_for('reg_ev', token=token, eventotk=eventotk, _external=True)
         msg.body = "Su enlace es {}".format(link)
         mail.send(msg)
-    return render_template("/Permisos_de_acceso_true.html",evs=eventitos)
+    return render_template("/Permisos_de_acceso_true.html",evs=eventitos,nomb=current_user.usuario)
 @app.route('/confirm_email/<token>/<eventotk>')
 def confirm_mail(token,eventotk):
     email=s.loads(token,salt='email-confirm',max_age=3600)
