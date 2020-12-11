@@ -86,11 +86,9 @@ pyrsistent==0.17.3
 PySocks==1.7.1
 python-dateutil==2.8.1
 python-editor==1.0.4
-python-libtorrent==1.2.10
 python-mimeparse==1.6.0
 python-utils==2.4.0
 pytz==2020.4
-PyYAML==5.3.1
 Quamash==0.6.1
 rados==2.0.0
 rbd==2.0.0
