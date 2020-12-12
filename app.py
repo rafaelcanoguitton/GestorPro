@@ -38,6 +38,7 @@ def login():
 @app.route("/dashboard",methods=['GET','POST'])
 def dashboard():
     if not current_user.is_authenticated:
+        print("DEBUUUUUUUUUUUUG")
         flash('Primero inicia sesión :D', 'danger')
     eventitos=Evento.query.filter(Evento.Usuarios_r.any(id=current_user.id)).all()
 
