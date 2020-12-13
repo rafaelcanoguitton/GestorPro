@@ -14,6 +14,8 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 @app.route('/', methods=['GET','POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
     reg_form=RegistrationForm()
     log_form=LoginForm()
     if reg_form.validate_on_submit():
@@ -38,10 +40,8 @@ def login():
 @app.route("/dashboard",methods=['GET','POST'])
 def dashboard():
     if not current_user.is_authenticated:
-        print("DEBUUUUUUUUUUUUG")
-        flash('Primero inicia sesión :D', 'danger')
+        return render_template("/Algo-salio-mal.html")
     eventitos=Evento.query.filter(Evento.Usuarios_r.any(id=current_user.id)).all()
-
     evento_form=EventoForm()
     upe_form=UE()
     if upe_form.validate_on_submit():
@@ -50,7 +50,6 @@ def dashboard():
             ev=Evento.query.filter(Evento.id_evento==idi.id_evento).first()
             db.session.delete(ev)
             db.session.commit()
-            print("Dont preocupeis")
             return redirect(url_for('dashboard'))
         #Evento.query.filter_by(id_evento=idi.id_evento).update({"id_evento":upe_form.id_e.data,"nombre":upe_form.nombre.data,"fecha_inicial":idi.fecha_inicial,"fecha_final":idi.fecha_final,"ubicacion":upe_form.ubicacion.data,"descripcion":upe_form.descripcion.data})
         idi.nombre=upe_form.nombre.data
