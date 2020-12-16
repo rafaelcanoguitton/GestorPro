@@ -121,10 +121,10 @@ def confirm_mail(token,eventotk):
     return render_template("/Felicidades.html",nom=ev.nombre)
 @app.route('/registro/<token>/<eventotk>',methods=['GET','POST'])
 def reg_ev(token,eventotk):
-    if request.method=='GET':
-        return render_template("/onlyregister.html")
     email = s.loads(token, salt='email-confirm', max_age=3600)
     idi = s.loads(eventotk, salt='evento-confirm', max_age=3600)
+    if request.method=='GET':
+        return render_template("/onlyregister.html",correo=email)
     ev = Evento.query.filter(Evento.id_evento == idi).one()
     username = request.form['username']
     password = request.form['password']
@@ -135,3 +135,7 @@ def reg_ev(token,eventotk):
     db.session.add(user)
     db.session.commit()
     return render_template("/Felicidades.html",nom=ev.nombre)
+
+@app.route('/preinscripcion/<string:evento> ')
+def preins():
+    return render_template("/Pre-Inscripcion.html")
