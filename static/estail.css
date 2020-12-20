@@ -1,7 +1,12 @@
 #invoice{
     padding: 30px;
 }
-
+a {
+    color: #ff842c;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
 .invoice {
     position: relative;
     min-height: 680px;
