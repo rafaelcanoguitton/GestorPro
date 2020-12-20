@@ -28,6 +28,7 @@ def login():
         db.session.add(user)
         db.session.commit()
         #flash('Registrado con éxito! Por favor inicie sesion.','success')
+        logout_user()
         return redirect(url_for('login'))
     if log_form.validate_on_submit():
         user_object = User.query.filter_by(usuario=log_form.username.data).first()
@@ -78,8 +79,42 @@ def dashboard():
 #CERRAR SESIÓN
 @app.route('/actividad/<int:id>',methods=['GET','POST'])
 def actividad(id):
-    actividades = Actividad.query.filter_by(id_actividad=id).all()
-    return "actividades de su evento: "+str(id)
+    actividades = Actividad.query.filter_by(id_evento=id).all()
+    idi = Evento.query.filter(Evento.id_evento == id).first()
+    return render_template("/actividades.html",act=actividades,nom_pag="Actividades",id_e=id,nom_ev=idi.nombre)
+@app.route('/actividad/crear/<int:id_ev>',methods=['GET','POST'])
+def actividad_c(id_ev):
+    if request.method=='POST':
+        id_eve=id_ev
+        nom = request.form['name']
+        desc = request.form['desc']
+        fecha_i = request.form['date1']
+        hora_i=request.form['hora1']
+        fecha_f = request.form['date2']
+        hora_f=request.form['hora2']
+        actividad=Actividad(nombre=nom,descripcion=desc,fecha_inicio=fecha_i,fecha_fin=fecha_f,id_evento=id_eve,hora_inicio=hora_i,hora_fin=hora_f)
+        db.session.add(actividad)
+        db.session.commit()
+    return redirect(url_for('actividad',id=id_eve))
+@app.route('/actividad/modificar/<int:id>/<int:id_eve>',methods=['GET','POST'])
+def actividad_m(id,id_eve):
+    if request.method=='POST':
+        actividad = Actividad.query.filter(Actividad.id_actividad == id).first()
+        actividad.nombre = request.form['name']
+        actividad.descripcion = request.form['desc']
+        actividad.fecha_inicio = request.form['date1']
+        actividad.hora_inicio=request.form['hora1']
+        actividad.fecha_fin = request.form['date2']
+        actividad.hora_fin=request.form['hora2']
+        db.session.commit()
+    return redirect(url_for('actividad',id=id_eve))
+    return "sueño"
+@app.route('/actividad/eliminar/<int:id>/<int:id_eve>',methods=['GET','POST'])
+def actividad_e(id,id_eve):
+    actividad = Actividad.query.filter(Actividad.id_actividad == id).first()
+    db.session.delete(actividad)
+    db.session.commit()
+    return redirect(url_for('actividad', id=id_eve))
 @app.route('/ambiente/<int:id>',methods=['GET','POST'])
 def ambiente(id):
     return "ambientes de su evento: " +str(id)
@@ -95,7 +130,7 @@ def logout():
 def send_mail():
     eventitos = Evento.query.filter(Evento.Usuarios_r.any(id=current_user.id)).all()
     if request.method== 'GET':
-        return render_template("/Permisos_de_acceso_true.html",evs=eventitos)
+        return render_template("/Permisos_de_acceso_true.html",evs=eventitos,nom_pag="Permisos de acceso")
     email=request.form['email']
     evento=request.form['select']
     eventotk=s.dumps(evento,salt='evento-confirm')
@@ -139,3 +174,6 @@ def reg_ev(token,eventotk):
 @app.route('/preinscripcion/<string:evento> ')
 def preins():
     return render_template("/Pre-Inscripcion.html")
+@app.route('/factura')
+def fac():
+    return render_template("factura_template.html")

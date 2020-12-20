@@ -1,83 +1,221 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Prototipo</title>
-    <link rel="stylesheet" href="static/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="static/assets/css/Animation-Cards-1.css">
-    <link rel="stylesheet" href="static/assets/css/Animation-Cards.css">
-    <link rel="stylesheet" href="static/assets/css/gradient-navbar-1.css">
-    <link rel="stylesheet" href="static/assets/css/gradient-navbar.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-    <link rel="stylesheet" href="static/assets/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="static/assets/css/Sidebar-Menu-1.css">
-    <link rel="stylesheet" href="static/assets/css/Sidebar-Menu.css">
-    <link rel="stylesheet" href="static/assets/css/styles.css">
-</head>
-<body style="background-color: rgb(0,0,0);">
-    <nav class="navbar navbar-light navbar-expand-md navigation-clean" style="background-color: rgb(10,10,10);">
-        <div class="container">
-            <div id="wrapper" class="toggled">
-                <div id="sidebar-wrapper" style="background-color: rgb(68,68,68);">
-                    <ul class="sidebar-nav">
-                        <li class="sidebar-brand"> </li>
-                        <li> <a href="#">CONFIGURACIÓN</a></li>
-                        <li> <a href="#">INSCRIPCIONES</a></li>
-                        <li> <a href="#">CAJA ADMINISTRADORA</a></li>
-                        <li> <a href="#">REPORTES</a></li>
-                        <li> <a href="#">ADMINISTRACIÓN</a></li>
-                        <li> <a href="#">ASISTENCIA</a></li>
-                        <li> <a href="#">HERRAMIENTAS</a></li>
-                    </ul>
-                </div>
-                <div class="page-content-wrapper">
-                    <div class="container-fluid text-left"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars"></i></a></div>
-                </div>
-            </div><a class="navbar-brand text-left" href="#" style="color: rgb(244,108,50);">GestorPro</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link active text-right" href="#">Joaquín Maurtua Diban</a></li>
-                    <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"></li>
-                </ul>
-        </div>
-        </div>
-    </nav>
-    <nav class="navbar navbar-light navbar-expand-md navigation-clean" style="background-color: #444444;">
-        <div class="container">
-            <div><a class="navbar-brand text-left" data-bs-hover-animate="pulse" href="/dashboard" style="color: rgb(255,255,255);background-color: rgb(252,134,68);padding: 21px;">EVENTOS</a></div>
-            <div><a class="navbar-brand text-left" data-bs-hover-animate="pulse" href="/roles" style="color: rgb(255,255,255);background-color: rgb(252,134,68);padding: 21px;">PERMISOS DE ACCESO<br></a></div>
-            <div><a class="navbar-brand text-left" data-bs-hover-animate="pulse" href="#" style="color: rgb(255,255,255);background-color: rgb(252,134,68);padding: 21px;">ARMAR PAQUETES</a></div><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div
-                class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"></li>
-                </ul>
-        </div>
-        </div>
-    </nav>
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 style="color: rgb(255,255,255);">Actividades</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% block content %}
+{% extends "Template.html" %}
+{% block content %}
+    <div class="container">
 
-    {% endblock %}
-    <script src="static/assets/js/jquery.min.js"></script>
-    <script src="static/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="static/assets/js/bs-init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-    <script src="static/assets/js/Sidebar-Menu.js"></script>
-</body>
-</html>
+            <div class="jumbotron p-3">
+
+                <h2>Actividades del evento : {{ nom_ev }}<button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal">Añadir actividad</button> </h2>
+
+                {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+                {{message}}
+
+
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+                {% endwith %}
+
+
+                <table class="table table-hover table-dark">
+
+                    <tr>
+
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Fecha de inicio</th>
+                        <th>Hora de inicio</th>
+                        <th>Fecha final</th>
+                        <th>Hora de fin</th>
+                        <th>Acción</th>
+                    </tr>
+
+
+                   {% for row in act %}
+                    <tr>
+                        <td>{{row.nombre}}</td>
+                        <td>{{row.descripcion}}</td>
+                        <td>{{row.fecha_inicio}}</td>
+                        <td>{{row.hora_inicio}}</td>
+                        <td>{{row.fecha_fin}}</td>
+                        <td>{{row.hora_fin}}</td>
+
+                        <td>
+                            <a href="/actividades/modificar/{{row.id_actividad}}/{{id_e}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id_actividad}}">Modificar</a>
+                            <a href="{{url_for('actividad_e',id=row.id_actividad,id_eve=id_e) }}" class="btn btn-danger btn-xs" onclick="return confirm('¿Estás seguro? ?')">Eliminar</a>
+                        </td>
+
+                    </tr>
+
+
+                    <div id="modaledit{{row.id_actividad}}" class="modal fade" role="dialog">
+                   <div class="modal-dialog">
+                      <div class="modal-content">
+                         <div class="modal-header">
+                            <h4 class="modal-title">Modificar actividad</h4>
+
+
+                         </div>
+
+
+                 <div class="modal-body">
+
+
+                    <form action="{{url_for('actividad_m',id=row.id_actividad,id_eve=id_e) }}" method="POST">
+                       <div class="form-group">
+                          <label>Nombre:</label>
+                           <input type="hidden"  name="id" value="{{row.id}}">
+                          <input type="text" class="form-control" name="name" value="{{row.nombre}}">
+                       </div>
+                       <div class="form-group">
+                          <label>Descripcion:</label>
+                           <input type="text" class="form-control" name="desc" value="{{row.descripcion}}">
+                       </div>
+                       <div class="form-group">
+                          <label>Fecha inicial:</label>
+                          <input type="text" class="form-control" name="date1" value="{{row.fecha_inicio}}">
+                       </div>
+                        <div class="form-group">
+                          <label>Hora inicial:</label>
+                          <input type="time" class="form-control" name="hora1" value="{{row.hora_inicio}}">
+                       </div>
+                        <div class="form-group">
+                          <label>Fecha final:</label>
+                          <input type="text" class="form-control" name="date2" value="{{row.fecha_fin}}">
+                       </div>
+                        <div class="form-group">
+                          <label>Hora final:</label>
+                          <input type="time" class="form-control" name="hora2" value="{{row.hora_fin}}">
+                       </div>
+
+
+                       <div class="form-group">
+
+
+                          <button class="btn btn-primary" type="submit">Modificar</button>
+
+
+                       </div>
+
+
+                    </form>
+
+
+                 </div>
+
+
+                 <div class="modal-footer">
+
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+
+                 </div>
+
+
+              </div>
+
+
+           </div>
+
+        </div>
+
+
+                            {% endfor %}
+
+
+                        </table>
+
+
+                    </div>
+
+        <div id="mymodal" class="modal fade" role="dialog">
+           <div class="modal-dialog">
+              <div class="modal-content">
+                 <div class="modal-header">
+                    <h4 class="modal-title">Añadir actividad</h4>
+                 </div>
+                 <div class="modal-body">
+                    <form action="/actividad/crear/{{id_e}}" method="POST">
+                       <div class="form-group">
+                          <label>Nombre:</label>
+                          <input type="text" class="form-control" name="name" required="1">
+                       </div>
+                        <div class="form-group">
+                          <label>Descripcion:</label>
+                            <input type="text" class="form-control" name="desc" required="1">
+                       </div>
+                        <div class="form-group">
+                          <label>Fecha inicial:</label>
+                          <input type="date" class="form-control" name="date1" required="1">
+                       </div>
+                        <div class="form-group">
+                          <label>Hora inicial:</label>
+                          <input type="time" class="form-control" name="hora1" required="1">
+                       </div>
+                        <div class="form-group">
+                          <label>Fecha final:</label>
+                          <input type="date" class="form-control" name="date2" required="1">
+                       </div>
+                        <div class="form-group">
+                          <label>Hora final:</label>
+                          <input type="time" class="form-control" name="hora2" required="1">
+                       </div>
+
+
+                       <div class="form-group">
+
+
+                          <button class="btn btn-primary" type="submit">Añadir actividad</button>
+
+
+                       </div>
+
+
+                    </form>
+
+
+                 </div>
+
+
+                 <div class="modal-footer">
+
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+
+                 </div>
+
+
+              </div>
+
+
+           </div>
+
+
+        </div>
+
+
+
+
+
+
+            </div>
+
+
+{%endblock%}

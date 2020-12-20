@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template,redirect,url_for,flash, request
 from flask_login import UserMixin
 from datetime import datetime
+from datetime import date
 app=Flask(__name__)
 app.config.update(
     MAIL_SERVER='smtp.gmail.com',
@@ -66,8 +67,8 @@ class Evento(db.Model):
     __tablename__= "Evento"
     id_evento= db.Column(db.Integer, primary_key=True)
     nombre=db.Column(db.String(100),nullable=False)
-    fecha_inicial=db.Column(db.DateTime,nullable=False)
-    fecha_final=db.Column(db.DateTime,nullable=False)
+    fecha_inicial=db.Column(db.DATE,nullable=False)
+    fecha_final=db.Column(db.DATE,nullable=False)
     ubicacion=db.Column(db.String(100),nullable=False)
     descripcion=db.Column(db.String(280),nullable=False)
     Materiales=db.relationship('Material',secondary=Evento_Material, backref=db.backref('Eventos'),lazy='dynamic')
@@ -106,8 +107,8 @@ class Actividad(db.Model):
     descripcion=db.Column(db.String(300))
     hora_inicio=db.Column(db.Time,nullable=False)
     hora_fin=db.Column(db.Time,nullable=False)
-    fecha_inicio=db.Column(db.DateTime,nullable=False)
-    fecha_fin=db.Column(db.DateTime,nullable=False)
+    fecha_inicio=db.Column(db.DATE,nullable=False)
+    fecha_fin=db.Column(db.DATE,nullable=False)
     id_actividad=db.Column(db.Integer,primary_key=True)
     nombre=db.Column(db.String(150),nullable=False)
     id_evento=db.Column(db.Integer,db.ForeignKey('Evento.id_evento'), nullable=False)
@@ -128,12 +129,6 @@ class Comite(db.Model):
     nombre=db.Column(db.String(150),nullable=False)
     representante=db.Column(db.String(150),nullable=False)
     descripcion=db.Column(db.String(300))
-class Participante(db.Model):
-    __tablename__="Participante"
-    id_participante=db.Column(db.Integer,primary_key=True)
-    nombre=db.Column(db.String(150),nullable=False)
-    correo=db.Column(db.String(150),nullable=False)
-    tipo=db.Column(db.String(150),nullable=False)
 class Reporte(db.Model):
     __tablename__="Reporte"
     tipo=db.Column(db.String(150),nullable=False)
@@ -148,7 +143,7 @@ class Factura(db.Model):
     descuento=db.Column(db.Float,nullable=False)
     IVA = db.Column(db.Float, nullable=False)
     fecha=db.Column(db.DateTime,nullable=False)
-    id_participante=db.Column(db.Integer,db.ForeignKey('Usuarios.id'), nullable=False)
+    id_participante=db.Column(db.Integer,db.ForeignKey('Participante.id_participante'), nullable=False)
 class Asistencia(db.Model):
     __tablename__="Asistencia"
     id_asistencia=db.Column(db.Integer,primary_key=True)
@@ -180,14 +175,18 @@ class Paquete(db.Model):
     Usuarios = db.relationship('User', secondary=Paquete_Usuario, backref=db.backref('Paquetes'), lazy='dynamic')
     Actividades = db.relationship('Actividad', secondary=Paquete_Actividad, backref=db.backref('Paquetes'), lazy='dynamic')
 #PALTASA CON ESTAS 4 ULTIMAS TABLAS Y SU PRIMARY KEY
-class Paquete_Tipo_Participante(db.Model):
-    __tablename__="Paquete_Tipo_Participante"
+class Paquete_Tipo_Participante_Precio(db.Model):
+    __tablename__="Paquete_Tipo_Participante_precio"
+    id_paquete_tipo=db.Column(db.Integer,primary_key=True)
     tipo_participante=db.Column(db.String(150), nullable=False)
-    id_paquete=db.Column(db.ForeignKey('Paquete.id_paquete'),nullable=False,primary_key=True)
-class Paquete_Precio(db.Model):
-    __tablename__="Paquete_Precio"
-    precio=db.Column(db.Float,nullable=False)
-    id_paquete=db.Column(db.ForeignKey('Paquete.id_paquete'),nullable=False,primary_key=True)
+    precio = db.Column(db.Float, nullable=False)
+    id_paquete=db.Column(db.ForeignKey('Paquete.id_paquete'),nullable=False)
+class Participante(db.Model):
+    __tablename__="Participante"
+    id_participante=db.Column(db.Integer,primary_key=True)
+    nombre=db.Column(db.String(150),nullable=False)
+    correo=db.Column(db.String(150),nullable=False)
+    tipo_participante = db.Column(db.ForeignKey('Paquete_Tipo_Participante_precio.id_paquete_tipo'), nullable=False)
 class Detalle(db.Model):
     __tablename__="Detalle"
     cantidad=db.Column(db.Integer,nullable=False)

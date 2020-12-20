@@ -1,0 +1,88 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="static/estail.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<!--Author      : @arboshiki-->
+<div id="invoice" >
+    <div class="invoice overflow-auto">
+        <div style="min-width: 600px">
+            <header>
+                <div class="row">
+                    <div class="col">
+                        <a target="_blank" href="https://lobianijs.com">
+                            <img src="static/GESTOR PRO.png" data-holder-rendered="true" />
+                            </a>
+                    </div>
+                    <div class="col company-details">
+                        <h2 class="name">
+                            <a target="_blank" href="https://lobianijs.com">
+                            Gestor Pro
+                            </a>
+                        </h2>
+                        <div>Urb. Las Esmeraldas I-5, José Luís Bustamente y Rivero</div>
+                        <div>(570) 600-1708</div>
+                        <div>gestorproaqp@gmail.com</div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div class="row contacts">
+                    <div class="col invoice-to">
+                        <div class="text-gray-light">FACTURA A:</div>
+                        <h2 class="to">{{nombre}}</h2>
+                        <div class="email"><a href="mailto:john@example.com">{{email}}</a></div>
+                    </div>
+                    <div class="col invoice-details">
+                        <h1 class="invoice-id">FACTURA {{id_factura}}</h1>
+                        <div class="date">Fecha: {{fecha}}</div>
+                    </div>
+                </div>
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="text-left">Concepto</th>
+                            <th class="text-right"></th>
+                            <th class="text-right"></th>
+                            <th class="text-right">TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="no">01</td>
+                            <td class="text-left"><h3>
+                                Paquete tal y cual
+                                </h3>
+                               Descripción del paquete
+                            </td>
+                            <td class="qty"></td>
+                            <td class="qty"></td>
+                            <td class="total">S/.{{ precio }}"</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">SUBTOTAL</td>
+                            <td>S/.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">IGV 18%</td>
+                            <td>S/.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td colspan="2">TOTAL</td>
+                            <td>S/.</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="thanks">¡Gracias!</div>
+            </main>
+        </div>
+        <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+        <div></div>
+    </div>
+</div>
