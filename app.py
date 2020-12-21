@@ -205,7 +205,7 @@ def material_c(id):
 @app.route('/material/modificar/<int:id>/<int:id_eve>',methods=['GET','POST'])
 def material_m(id,id_eve):
     if request.method=='POST':
-        mati = Ambiente.query.filter(Ambiente.id_ambiente == id).first()
+        mati = Material.query.filter(Material.id_material == id).first()
         mati.nombre=request.form['name']
         mati.stock=request.form['cap']
         mati.desc=request.form['desc']
@@ -216,10 +216,10 @@ def material_m(id,id_eve):
 @app.route('/material/asignar/<int:id>/<int:id_eve>',methods=['GET','POST'])
 def material_a(id,id_eve):
     if request.method=='POST':
-        acti = Actividad.query.filter(Actividad.id_actividad == id).first()
+        ambi = Ambiente.query.filter(Ambiente.id_ambiente== id).first()
         mati_id = request.form['select']
         materi = Material.query.filter(Material.id_material == mati_id).first()
-        materi.Ambientes.append(acti)
+        materi.Ambientes.append(ambi)
         db.session.commit()
     return redirect(url_for('material', id=id_eve))
 #REQUISITOS IMPLEMENTADOS EN ESTA RUTA:
