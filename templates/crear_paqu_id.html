@@ -1,0 +1,29 @@
+{% extends "Template.html" %}
+{% block content %}
+<div class="container">
+<style type="text/css">
+   form { background: white; padding: 25px 50px 75px 100px; !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+    </style>
+<form action="{{url_for('crear_p_f',id=ev.id_evento) }}" method="POST">
+  <div class="form-group formsito">
+      <label>Nombre:</label>
+      <input type="text" class="form-control" name="name" required="1">
+   </div>
+    <div class="form-group">
+      <label>Tipo de participante:</label>
+      <input type="text" class="form-control" name="tipo" required="1">
+   </div>
+    <div class="form-group">
+      <label>Precio:</label>
+      <input type="text" class="form-control" name="precio" aria-describedby="inputGroupPrepend2" required="1">
+   </div>
+    <div class="mb-3 form-check form-group">
+        {% for row in act %}
+    <p><input type="checkbox" class="form-check-input" name="mycheckbox" value="{{ row.id_actividad }}">
+    <label class="form-check-label" for="exampleCheck1">{{ row.nombre }}</label></p>
+        {% endfor %}
+  </div>
+  <button type="submit" class="btn btn-primary">Crear paquete</button>
+</form>
+</div>
+{%endblock%}

@@ -10,7 +10,7 @@
             <header>
                 <div class="row">
                     <div class="col">
-                        <a target="_blank" href="https://lobianijs.com">
+                        <a target="_blank" >
                             <img src="static/GESTOR PRO.png" data-holder-rendered="true" />
                             </a>
                     </div>
@@ -50,30 +50,30 @@
                         <tr>
                             <td class="no">01</td>
                             <td class="text-left"><h3>
-                                Paquete tal y cual
+                                Paquete {{ paquete }}
                                 </h3>
-                               Descripción del paquete
+                               Tipo {{ tipo }}
                             </td>
                             <td class="qty"></td>
                             <td class="qty"></td>
-                            <td class="total">S/.{{ precio }}"</td>
+                            <td class="total">S/.{{ precio }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">SUBTOTAL</td>
-                            <td>S/.</td>
+                            <td>S/.{{ precio*0.82 }}</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">IGV 18%</td>
-                            <td>S/.</td>
+                            <td>S/.{{ precio*0.18 }}</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">TOTAL</td>
-                            <td>S/.</td>
+                            <td>S/.{{ precio }}</td>
                         </tr>
                     </tfoot>
                 </table>

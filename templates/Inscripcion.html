@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Inscripción</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container">
+    <h1>¡Inscribete al evento: {{ ev.nombre }}!</h1>
+    {% for row in paqs %}
+    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Paquete: {{row.nombre}}</h5>
+    <p class="card-text">Incluye actividades: {% for row1 in row.Actividades %}
+                        {{ row1.nombre }} ,
+                        {% endfor %}
+    <a href="/ins/{{row.id_paquete}}" class="btn btn-primary">¡Quiero este paquete!</a>
+  </div>
+</div>
+{% endfor %}
+    <a href="/yamepreinscribi"><button type="submit" class="btn btn-primary">Estoy preinscrito</button></a>
+  </div>
+
+</body>
+</html>

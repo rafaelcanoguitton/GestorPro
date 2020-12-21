@@ -1,0 +1,14 @@
+{% extends "Template.html" %}
+{% block content %}
+<div class="container">
+{% for row in evs %}
+    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{row.nombre}}</h5>
+    <p class="card-text">{{row.descripcion}}</p>
+    <a href="/crear_paquete/{{row.id_evento}}" class="btn btn-primary">Usar Evento</a>
+  </div>
+</div>
+{% endfor %}
+</div>
+{%endblock%}

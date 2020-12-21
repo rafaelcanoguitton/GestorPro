@@ -1,0 +1,204 @@
+{% extends "Template.html" %}
+{% block content %}
+    <div class="container">
+
+            <div class="jumbotron p-3">
+
+                <h2>Materiales del evento : {{ nom_ev }}<button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal">Añadir material</button> </h2>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+                {{message}}
+
+
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+                {% endwith %}
+
+
+                <table class="table table-hover table-dark">
+
+                    <tr>
+
+                        <th>Nombre</th>
+                        <th>Stock</th>
+                        <th>Descripcion</th>
+                        <th>Ambientes</th>
+                        <th>Acciones</th>
+                    </tr>
+                   {% for row in mat %}
+                    <tr>
+                        <td>{{row.nombre}}</td>
+                        <td>{{row.stock}}</td>
+                        <td>{{row.descripcion}}</td>
+                        <td>
+                        {% for row1 in row.Actividades %}
+                        {{ row1.nombre }} ,
+                        {% endfor %}
+                        </td>
+                        <td>
+                            <a class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id_material}}">Modificar</a>
+                            <a href="/material/eliminar/{{row.id_material}}/{{id_e}}" class="btn btn-danger btn-xs" onclick="return confirm('¿Estás seguro? ?')">Eliminar</a>
+                            <a class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal_a{{row.id_material}}">Asignar Ambiente</a>
+                        </td>
+
+                    </tr>
+                    <div id="modaledit{{row.id_material}}" class="modal fade" role="dialog">
+                   <div class="modal-dialog">
+                      <div class="modal-content">
+                         <div class="modal-header">
+                            <h4 class="modal-title">Modificar material</h4>
+
+
+                         </div>
+
+
+                 <div class="modal-body">
+
+
+                    <form action="{{url_for('material_m',id=row.id_material,id_eve=id_e) }}" method="POST">
+                       <div class="form-group">
+                          <label>Nombre:</label>
+                           <input type="hidden"  name="id" value="{{row.id}}">
+                          <input type="text" class="form-control" name="name" value="{{row.nombre}}">
+                       </div>
+                       <div class="form-group">
+                          <label>Stock:</label>
+                           <input type="text" class="form-control" name="cap" value="{{row.capacidad}}">
+                       </div>
+                        <div class="form-group">
+                          <label>Descripcion:</label>
+                           <input type="text" class="form-control" name="desc" value="{{row.descripcion}}">
+                       </div>
+                       <div class="form-group">
+
+
+                          <button class="btn btn-primary" type="submit">Modificar</button>
+
+
+                       </div>
+
+
+                    </form>
+
+
+                 </div>
+
+
+                 <div class="modal-footer">
+
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+
+                 </div>
+
+
+              </div>
+
+
+           </div>
+
+        </div>
+
+                       <div id="modal_a{{row.id_material}}" class="modal fade" role="dialog">
+                   <div class="modal-dialog">
+                      <div class="modal-content">
+                         <div class="modal-header">
+                            <h4 class="modal-title">Asignar Material</h4>
+                         </div>
+
+
+                 <div class="modal-body">
+
+
+                    <form action="{{url_for('material_a',id=row.id_material,id_eve=id_e) }}" method="POST">
+                       <div class="form-group">
+                          <select class="form-select" name="select" aria-label="Seleccione su ambiente">
+                        {% for row in ambi %}
+                        <option value={{row.id_ambiente}}>{{row.nombre}}</option>
+                        {% endfor %}
+                    </select>
+                       </div>
+                       <div class="form-group">
+                          <button class="btn btn-primary" type="submit">Asignar Ambiente</button>
+                       </div>
+                    </form>
+                 </div>
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+
+                 </div>
+
+
+              </div>
+
+
+           </div>
+
+        </div>
+
+                            {% endfor %}
+
+
+                        </table>
+
+
+                    </div>
+
+        <div id="mymodal" class="modal fade" role="dialog">
+           <div class="modal-dialog">
+              <div class="modal-content">
+                 <div class="modal-header">
+                    <h4 class="modal-title">Añadir material</h4>
+                 </div>
+                 <div class="modal-body">
+                    <form action="/material/crear/{{id_e}}" method="POST">
+                       <div class="form-group">
+                          <label>Nombre:</label>
+                          <input type="text" class="form-control" name="name" required="1">
+                       </div>
+                        <div class="form-group">
+                          <label>Stock:</label>
+                          <input type="text" class="form-control" name="capa" required="1">
+                       </div>
+                        <div class="form-group">
+                          <label>Descripcion:</label>
+                            <input type="text" class="form-control" name="desc" required="1">
+                       </div>
+                       <div class="form-group">
+                          <button class="btn btn-primary" type="submit">Añadir Material</button>
+                       </div>
+                    </form>
+                 </div>
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+
+                 </div>
+
+
+              </div>
+
+
+           </div>
+
+
+        </div>
+            </div>
+
+
+{%endblock%}
